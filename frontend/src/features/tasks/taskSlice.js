@@ -15,7 +15,8 @@ export const fetchTasks = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await taskService.getAll();
-      return res;
+      // console.log("response for fetchTasks in taskSlice is: ", res.data);
+      return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -27,9 +28,13 @@ export const createTask = createAsyncThunk(
   async (taskData, thunkAPI) => {
     try {
       const res = await taskService.create(taskData);
-      return res;
+      console.log("Response for create task: ", res);
+
+      return res.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Something went wrong"
+      );
     }
   }
 );
@@ -38,8 +43,9 @@ export const updateTask = createAsyncThunk(
   "tasks/update",
   async ({ id, data }, thunkAPI) => {
     try {
+      console.log("data in updateTask Slice: ", id, data);
       const res = await taskService.update(id, data);
-      return res;
+      return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -50,10 +56,13 @@ export const deleteTask = createAsyncThunk(
   "tasks/delete",
   async (id, thunkAPI) => {
     try {
-      await taskService.delete(id);
-      return id;
+      const res = await taskService.delete(id);
+      console.log("response in delete task thunk: ", res);
+      return res.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Failed to delete task"
+      );
     }
   }
 );

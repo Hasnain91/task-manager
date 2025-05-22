@@ -18,12 +18,15 @@ const createTask = async (req, res) => {
     const duplicate = await Task.findOne({ title, status });
     if (duplicate) {
       return res.status(400).json({
+        success: false,
         message: "Task with this title already exists in this status group",
       });
     }
 
     const task = await Task.create({ title, description, deadline, status });
-    res.status(201).json({ success: true, data: task });
+    res
+      .status(201)
+      .json({ success: true, message: "Task added successfully!", data: task });
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log("Error in createTask controller:: ".red, error.mesaage);
@@ -65,6 +68,7 @@ const getAllTasks = async (req, res) => {
 // update taks
 const updateTask = async (req, res) => {
   try {
+    console.log("Update request body:".green, req.body);
     const { title, description, deadline, status } = req.body;
     const { id } = req.params;
 
