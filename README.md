@@ -18,7 +18,26 @@ A full-stack Task Management app built with **React**, **Redux**, **Express**, *
 
 ## Folder Structure
 
-<pre><code>```text root/ ├── backend/ # Express backend │ ├── controllers/ # Task controller logic │ ├── models/ # Task schema │ ├── routes/ # Task API routes │ ├── config/ # DB connection │ └── server.js ├── frontend/ # React frontend │ ├── public/ │ └── src/ │ ├── components/ # TaskCard, TaskBoard, Modals etc │ ├── features/ # Redux slices │ ├── utils/ # highlightSearchTerm.js │ ├── pages/ # Home.jsx │ ├── App.jsx │ └── main.jsx ├── .gitignore └── README.md ```</code></pre>
+```
+root/
+├── backend/              # Express backend
+│   ├── controllers/      # Task controller logic
+│   ├── models/           # Task schema
+│   ├── routes/           # Task API routes
+│   ├── config/           # DB connection
+│   └── server.js
+├── frontend/             # React frontend
+│   ├── public/
+│   └── src/
+│       ├── components/   # TaskCard, TaskBoard, Modals etc
+│       ├── features/     # Redux slices
+│       ├── utils/        # highlightSearchTerm.js
+│       ├── pages/        # Home.jsx
+│       ├── App.jsx
+│       └── main.jsx
+├── .gitignore
+└── README.md
+```
 
 ---
 
