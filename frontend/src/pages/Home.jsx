@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import TaskModal from "../components/TaskModal";
+import TaskModal from "../components/AddTaskModal";
 import TaskBoard from "../components/TaskBoard";
 import { useDispatch } from "react-redux";
 import { fetchTasks } from "../features/tasks/taskSlice";

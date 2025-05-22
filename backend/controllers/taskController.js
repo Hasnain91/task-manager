@@ -65,10 +65,9 @@ const getAllTasks = async (req, res) => {
   }
 };
 
-// update taks
+// update taks (all fields)
 const updateTask = async (req, res) => {
   try {
-    console.log("Update request body:".green, req.body);
     const { title, description, deadline, status } = req.body;
     const { id } = req.params;
 
@@ -99,7 +98,7 @@ const updateTask = async (req, res) => {
     if (duplicate) {
       return res.status(400).json({
         success: false,
-        message: "Duplicate task in the same status group",
+        message: "Duplicate task in the same status group can't exist.",
       });
     }
 

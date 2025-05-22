@@ -3,8 +3,13 @@ import axios from "axios";
 const API_URL = "http://localhost:3000/api/tasks";
 
 const getAll = async () => {
-  const res = await axios.get(API_URL);
-  return res.data;
+  try {
+    const res = await axios.get(API_URL);
+    return res.data;
+  } catch (error) {
+    console.error("Create task error:", error.response?.data || error.message);
+    throw error;
+  }
 };
 
 const create = async (taskData) => {
@@ -19,14 +24,23 @@ const create = async (taskData) => {
 };
 
 const update = async (id, data) => {
-  console.log("Data in uodate service: ", id, data);
-  const res = await axios.put(`${API_URL}/${id}`, data);
-  return res.data;
+  try {
+    const res = await axios.put(`${API_URL}/${id}`, data);
+    return res.data;
+  } catch (error) {
+    console.error("update task error:", error.response?.data || error.message);
+    throw error;
+  }
 };
 
 const deleteTask = async (id) => {
-  const res = await axios.delete(`${API_URL}/${id}`);
-  return res;
+  try {
+    const res = await axios.delete(`${API_URL}/${id}`);
+    return res;
+  } catch (error) {
+    console.error("delete task error:", error.response?.data || error.message);
+    throw error;
+  }
 };
 
 const taskService = {

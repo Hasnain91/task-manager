@@ -15,7 +15,6 @@ export const fetchTasks = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await taskService.getAll();
-      // console.log("response for fetchTasks in taskSlice is: ", res.data);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -43,11 +42,13 @@ export const updateTask = createAsyncThunk(
   "tasks/update",
   async ({ id, data }, thunkAPI) => {
     try {
-      console.log("data in updateTask Slice: ", id, data);
       const res = await taskService.update(id, data);
+      console.log("response in update slice: ", res);
       return res.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Something went wrong"
+      );
     }
   }
 );

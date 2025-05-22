@@ -43,13 +43,11 @@ const TaskModal = ({ isOpen, onClose }) => {
     try {
       const result = await dispatch(createTask(taskData)).unwrap();
       toast.success(result.message || "Task Created Successfully!");
-      // ✅ Close modal
+      //close modal
       onClose();
 
-      // ✅ Refresh the TaskBoard
       dispatch(fetchTasks());
 
-      // ✅ Reset form fields
       setTitle("");
       setDescription("");
       setDeadline("");
