@@ -18,24 +18,7 @@ A full-stack Task Management app built with **React**, **Redux**, **Express**, *
 
 ## Folder Structure
 
-root/
-├── backend/ # Express backend
-│ ├── controllers/ # Task controller logic
-│ ├── models/ # Task schema
-│ ├── routes/ # Task API routes
-│ ├── config/ # DB connection
-│ └── server.js
-├── frontend/ # React frontend
-│ ├── public
-│ ├── src
-| ├── components/ # TaskCard, TaskBoard, Modals etc
-│ ├── features/ # Redux slices
-│ ├── utils/ # highlightSearchTerm.js
-│ ├── pages/ # Home.jsx
-│ ├── App.jsx
-│ └── main.jsx
-├── .gitignore
-└── README.md
+<pre><code>```text root/ ├── backend/ # Express backend │ ├── controllers/ # Task controller logic │ ├── models/ # Task schema │ ├── routes/ # Task API routes │ ├── config/ # DB connection │ └── server.js ├── frontend/ # React frontend │ ├── public/ │ └── src/ │ ├── components/ # TaskCard, TaskBoard, Modals etc │ ├── features/ # Redux slices │ ├── utils/ # highlightSearchTerm.js │ ├── pages/ # Home.jsx │ ├── App.jsx │ └── main.jsx ├── .gitignore └── README.md ```</code></pre>
 
 ---
 
@@ -50,25 +33,43 @@ cd backend
 ```
 
 2. Install dependencies:
-   npm install
+
+```bash
+npm install
+```
 
 3. Create a .env file with:
-   MONGO_URI=<your_mongodb_connection_string>
-   PORT=5000
+
+```env
+MONGO_URI=<your_mongodb_connection_string>
+PORT=5000
+```
 
 4. Start the backend:
-   npm run dev
+
+```bash
+npm run dev
+```
 
 ### Frontend (React + Redux + Tailwind)
 
 1. Navigate to the frontend folder:
-   cd frontend
+
+```bash
+cd frontend
+```
 
 2. Install dependencies:
-   npm install
+
+```bash
+npm install
+```
 
 3. Start the frontend:
-   npm run dev
+
+```bash
+npm run dev
+```
 
 ## Logic & Functionality
 
@@ -92,6 +93,6 @@ cd backend
 
 ## Author
 
-Hasnain Iftikhar
-Email: hasnainiftikhar.rao@gmail.com
+Hasnain Iftikhar  
+Email: hasnainiftikhar.rao@gmail.com  
 GitHub Profile: https://github.com/Hasnain91
