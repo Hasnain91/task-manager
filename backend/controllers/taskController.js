@@ -62,6 +62,7 @@ const getAllTasks = async (req, res) => {
   }
 };
 
+// update taks
 const updateTask = async (req, res) => {
   try {
     const { title, description, deadline, status } = req.body;
@@ -107,7 +108,27 @@ const updateTask = async (req, res) => {
     res.status(200).json({ success: true, data: updated });
   } catch (error) {
     res.status(500).json({ message: error.message });
-    console.log("Error in uodateTask Controller: ".red, error);
+    console.log("Error in updateTask Controller: ".red, error);
+  }
+};
+
+// delete task
+const deleteTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const task = await Task.findByIdAndDelete(id);
+    if (!task) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Task Not Found" });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: "Task Deleted Successfully." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log("Error in deleteTask Controller: ".red, error);
   }
 };
 
@@ -115,4 +136,5 @@ module.exports = {
   createTask,
   getAllTasks,
   updateTask,
+  deleteTask,
 };
