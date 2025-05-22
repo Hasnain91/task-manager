@@ -30,7 +30,10 @@ const TaskBoard = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
       {columns.map((col) => (
-        <div key={col.status} className="rounded-lg p-3 shadow-md border">
+        <div
+          key={col.status}
+          className="rounded-lg p-3 shadow-xl shadow-violet-700 border"
+        >
           <h2 className="text-lg font-semibold mb-3">{col.title}</h2>
           <div className="space-y-3">
             {groupTasksByStatus(col.status).map((task) => (

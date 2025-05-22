@@ -60,26 +60,32 @@ const TaskCard = ({ task }) => {
 
   return (
     <>
-      <div className="bg-white p-4 shadow rounded-md border relative">
-        <h3 className="font-semibold text-md">{task.title}</h3>
+      <div className="bg-violet-200/90 p-4 shadow rounded-md border relative ">
+        <h3 className="font-semibold text-md text-gray-900">{task.title}</h3>
         <p className="text-sm text-gray-600 mb-1">{task.description}</p>
 
         {task.deadline && (
-          <p className="text-xs text-gray-500">
+          <p className="text-md text-gray-800">
             Deadline: {dayjs(task.deadline).format("MMM D, YYYY")}
           </p>
         )}
 
         <div className="mt-2">
-          <label className="text-xs font-medium">Status:</label>
+          <label className="text-xs text-gray-900 font-medium">Status:</label>
           <select
-            className="w-full border p-1 rounded text-sm mt-1"
+            className="w-full border text-gray-900  p-1 rounded text-sm mt-1"
             value={status}
             onChange={(e) => handleStatusChange(e.target.value)}
           >
-            <option value="To Do">To Do</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Done">Done</option>
+            <option className="text-gray-900" value="To Do">
+              To Do
+            </option>
+            <option className="text-gray-900" value="In Progress">
+              In Progress
+            </option>
+            <option className="text-gray-900" value="Done">
+              Done
+            </option>
           </select>
         </div>
 

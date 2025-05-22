@@ -64,7 +64,9 @@ const TaskModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
-        <h2 className="text-xl font-semibold mb-4">Create Task</h2>
+        <h2 className="text-xl text-gray-900 font-semibold mb-4">
+          Create Task
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <p className="text-red-600 text-sm mt-2">
@@ -75,44 +77,52 @@ const TaskModal = ({ isOpen, onClose }) => {
           )}
 
           <div>
-            <label className="block text-sm font-medium">Title</label>
+            <label className="block text-gray-900 text-sm font-medium">
+              Title
+            </label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength={100}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 text-gray-900 border rounded"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Description</label>
+            <label className="block text-gray-900 text-sm font-medium">
+              Description
+            </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               maxLength={500}
-              className="w-full p-2 border rounded"
+              className="w-full text-gray-900 p-2 border rounded"
               rows={4}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Deadline</label>
+            <label className="block text-gray-900 text-sm font-medium">
+              Deadline
+            </label>
             <input
               type="date"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full text-gray-900 p-2 border rounded"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Status</label>
+            <label className="block text-gray-900 text-sm font-medium">
+              Status
+            </label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 text-gray-900 border rounded"
             >
               <option value="To Do">To Do</option>
               <option value="In Progress">In Progress</option>
