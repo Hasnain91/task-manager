@@ -35,7 +35,7 @@ const TaskCard = ({ task }) => {
   };
 
   const handleStatusChange = async (newStatus) => {
-    setStatus(newStatus); // update UI immediately
+    setStatus(newStatus);
 
     const updatedTask = {
       title: task.title,
@@ -53,27 +53,30 @@ const TaskCard = ({ task }) => {
       dispatch(fetchTasks());
     } catch (err) {
       toast.error(err);
-
-      setStatus(task.status); // revert if failed
+      setStatus(task.status); // revert on error
     }
   };
 
   return (
     <>
-      <div className="bg-violet-200/90 p-4 shadow rounded-md border relative ">
-        <h3 className="font-semibold text-md text-gray-900">{task.title}</h3>
-        <p className="text-sm text-gray-600 mb-1">{task.description}</p>
+      <div className="bg-violet-200/90 p-4 shadow rounded-md border relative">
+        <h3 className="font-semibold text-base text-gray-900">{task.title}</h3>
+        <p className="text-sm text-gray-600 mb-1 line-clamp-2">
+          {task.description}
+        </p>
 
         {task.deadline && (
-          <p className="text-md text-gray-800">
+          <p className="text-sm text-gray-800 mt-1">
             Deadline: {dayjs(task.deadline).format("MMM D, YYYY")}
           </p>
         )}
 
         <div className="mt-2">
-          <label className="text-xs text-gray-900 font-medium">Status:</label>
+          <label className="text-xs text-gray-900 font-medium block mb-1">
+            Status:
+          </label>
           <select
-            className="w-full border text-gray-900  p-1 rounded text-sm mt-1"
+            className="w-full border text-gray-900 p-1.5 rounded text-sm mt-1"
             value={status}
             onChange={(e) => handleStatusChange(e.target.value)}
           >
@@ -90,29 +93,29 @@ const TaskCard = ({ task }) => {
         </div>
 
         {isOverdue && (
-          <span className="absolute top-2 right-2 text-xs bg-red-500 text-white px-2 py-0.5 rounded">
+          <span className="absolute top-2 right-2 text-xs bg-red-500 text-white px-2 py-0.5 rounded whitespace-nowrap">
             Overdue
           </span>
         )}
 
-        <div className="flex gap-2 mt-3">
+        <div className="flex flex-wrap gap-2 mt-3">
           <button
             onClick={() => setIsEditModalOpen(true)}
-            className="text-sm text-white px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded-sm"
+            className="text-sm text-white px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded-sm min-w-[60px] text-center"
           >
             Edit
           </button>
 
           <button
             onClick={() => setIsDeleteModalOpen(true)}
-            className="text-sm text-white px-3 py-1 bg-red-600 hover:bg-red-700 rounded-sm"
+            className="text-sm text-white px-3 py-1 bg-red-600 hover:bg-red-700 rounded-sm min-w-[60px] text-center"
           >
             Delete
           </button>
         </div>
       </div>
 
-      {/* Delete Confirmation Modal */}
+      {/* Modals */}
       <ConfirmModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -121,7 +124,6 @@ const TaskCard = ({ task }) => {
         message={`Are you sure you want to delete "${task.title}"? This action cannot be undone.`}
       />
 
-      {/* Edit Task Modal */}
       <EditTaskModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}

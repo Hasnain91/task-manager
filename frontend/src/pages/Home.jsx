@@ -13,19 +13,21 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Task Manager</h1>
+    <div className="min-h-screen p-4 sm:p-6 md:p-8">
+      <div className="max-w-5xl mx-auto w-full">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white ">
+            Task Manager
+          </h1>
+
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-gradient-to-r from-purple-300 via-violet-500 to-purple-700  text-white font-semibold px-4 py-2 rounded hover:bg-blue-700"
+            className="w-full sm:w-auto bg-gradient-to-r from-purple-300 via-violet-500 to-purple-700 text-white font-semibold px-4 py-2 rounded hover:from-purple-400 hover:to-purple-800 transition-colors"
           >
             + New Task
           </button>
         </div>
 
-        {/* Future: TaskBoard will go here */}
         <TaskBoard />
 
         <TaskModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

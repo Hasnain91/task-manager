@@ -49,15 +49,15 @@ const EditTaskModal = ({ isOpen, onClose, task }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white w-full max-w-md p-6 rounded shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">Edit Task</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+      <div className="bg-white w-full max-w-md mx-auto rounded shadow-lg p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Edit Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             name="title"
             type="text"
             placeholder="Title"
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 text-gray-900 rounded text-sm"
             value={formData.title}
             onChange={handleChange}
             required
@@ -65,20 +65,21 @@ const EditTaskModal = ({ isOpen, onClose, task }) => {
           <textarea
             name="description"
             placeholder="Description"
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 text-gray-900 rounded text-sm resize-none"
             value={formData.description}
             onChange={handleChange}
+            rows={3}
           />
           <input
             name="deadline"
             type="date"
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 text-gray-900 rounded text-sm"
             value={formData.deadline}
             onChange={handleChange}
           />
           <select
             name="status"
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 text-gray-900 rounded text-sm"
             value={formData.status}
             onChange={handleChange}
           >
@@ -91,13 +92,13 @@ const EditTaskModal = ({ isOpen, onClose, task }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 text-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
             >
               Save
             </button>

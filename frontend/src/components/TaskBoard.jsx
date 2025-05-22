@@ -7,7 +7,6 @@ const TaskBoard = () => {
   const dispatch = useDispatch();
   const { tasks, loading, error } = useSelector((state) => state.tasks);
 
-  //   console.log(tasks);
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
@@ -19,23 +18,33 @@ const TaskBoard = () => {
   };
 
   const columns = [
-    { title: "To Do", color: "bg-red-100", status: "To Do" },
-    { title: "In Progress", color: "bg-yellow-100", status: "In Progress" },
-    { title: "Done", color: "bg-green-100", status: "Done" },
+    { title: "To Do", status: "To Do" },
+    { title: "In Progress", status: "In Progress" },
+    { title: "Done", status: "Done" },
   ];
 
-  if (loading) return <div className="text-center mt-4">Loading tasks...</div>;
-  if (error) return <div className="text-red-500 text-center">{error}</div>;
+  if (loading)
+    return (
+      <div className="text-center mt-4 text-gray-600">Loading tasks...</div>
+    );
+  if (error)
+    return (
+      <div className="text-red-500 text-center p-4 bg-red-50 rounded-md">
+        {error}
+      </div>
+    );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       {columns.map((col) => (
         <div
           key={col.status}
-          className="rounded-lg p-3 shadow-xl shadow-violet-700 border"
+          className="bg-white rounded-lg shadow-xl shadow-purple-700 border border-gray-200 p-3"
         >
-          <h2 className="text-lg font-semibold mb-3">{col.title}</h2>
-          <div className="space-y-3">
+          <h2 className="text-lg font-semibold mb-3 text-gray-800">
+            {col.title}
+          </h2>
+          <div className="space-y-3 max-h-[70vh] overflow-y-auto">
             {groupTasksByStatus(col.status).map((task) => (
               <TaskCard key={task._id} task={task} />
             ))}
