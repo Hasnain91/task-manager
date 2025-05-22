@@ -26,7 +26,7 @@ const createTask = async (req, res) => {
     res.status(201).json({ success: true, data: task });
   } catch (error) {
     res.status(500).json({ message: error.message });
-    console.log("Intern Server Error: ".red, error.mesaage);
+    console.log("Error in createTask controller:: ".red, error.mesaage);
   }
 };
 
@@ -58,11 +58,61 @@ const getAllTasks = async (req, res) => {
     res.status(200).json({ success: true, data: tasks });
   } catch (error) {
     res.status(500).json({ message: error.message });
-    console.log("Intern Server Error: ".red, error);
+    console.log("Error in getAllTasks Controller: ".red, error);
+  }
+};
+
+const updateTask = async (req, res) => {
+  try {
+    const { title, description, deadline, status } = req.body;
+    const { id } = req.params;
+
+    if (!title || title.length > 100) {
+      return res.status(400).json({ success: false, message: "Invalid Title" });
+    }
+
+    if (description && description.length > 500) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Description Too Long" });
+    }
+
+    const task = await Task.findById(id);
+    if (!task) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Task Not Found" });
+    }
+
+    // Prevent duplicate task in the same status grp
+    const duplicate = await Task.findOne({
+      _id: { $ne: task._id },
+      title,
+      status,
+    });
+
+    if (duplicate) {
+      return res.status(400).json({
+        success: false,
+        message: "Duplicate task in the same status group",
+      });
+    }
+
+    task.title = title;
+    task.description = description;
+    task.status = status;
+    task.deadline = deadline;
+
+    const updated = await task.save();
+    res.status(200).json({ success: true, data: updated });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log("Error in uodateTask Controller: ".red, error);
   }
 };
 
 module.exports = {
   createTask,
   getAllTasks,
+  updateTask,
 };
