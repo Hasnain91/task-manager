@@ -83,7 +83,7 @@ const EditTaskModal = ({ isOpen, onClose, task }) => {
             value={formData.status}
             onChange={handleChange}
           >
-            <option value="Pending">Pending</option>
+            <option value="To Do">To Do</option>
             <option value="In Progress">In Progress</option>
             <option value="Done">Done</option>
           </select>
