@@ -1,4 +1,5 @@
 const Task = require("../models/taskModel");
+const colors = require("colors");
 
 // Create new Task
 const createTask = async (req, res) => {
@@ -25,9 +26,43 @@ const createTask = async (req, res) => {
     res.status(201).json({ success: true, data: task });
   } catch (error) {
     res.status(500).json({ message: error.message });
+    console.log("Intern Server Error: ".red, error.mesaage);
+  }
+};
+
+// get all tasks (filtering and search too)
+const getAllTasks = async (req, res) => {
+  try {
+    const { status, search } = req.query;
+    let query = {};
+
+    if (status && status !== "All") {
+      query.status = status;
+    }
+
+    if (search) {
+      query.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    let tasks = await Task.find(query).sort("-updatedAt");
+
+    tasks = tasks.map((task) => {
+      const isOverdue = task.deadline && new Date(task.deadline) < new Date();
+
+      return { ...task._doc, isOverdue };
+    });
+
+    res.status(200).json({ success: true, data: tasks });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log("Intern Server Error: ".red, error);
   }
 };
 
 module.exports = {
   createTask,
+  getAllTasks,
 };
