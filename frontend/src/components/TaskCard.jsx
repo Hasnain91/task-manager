@@ -60,11 +60,16 @@ const TaskCard = ({ task }) => {
   return (
     <>
       <div className="bg-violet-200/90 p-4 shadow rounded-md border relative">
-        <h3 className="font-semibold text-base text-gray-900">{task.title}</h3>
-        <p className="text-sm text-gray-600 mb-1 line-clamp-2">
+        {/* <h3 className="font-semibold text-base text-gray-900">{task.title}</h3> */}
+        <h3 className="font-semibold text-gray-900 text-md">
+          {task.highlightedTitle || task.title}
+        </h3>
+        {/* <p className="text-sm text-gray-600 mb-1 line-clamp-2">
           {task.description}
+        </p> */}
+        <p className="text-sm text-gray-600 mb-1">
+          {task.highlightedDescription || task.description}
         </p>
-
         {task.deadline && (
           <p className="text-sm text-gray-800 mt-1">
             Deadline: {dayjs(task.deadline).format("MMM D, YYYY")}
